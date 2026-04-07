@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAMVI — Admin Panel</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="hdr-ornament"><i></i><em>✦</em><i></i></div>
+  <h1 class="brand-name">SAMVI</h1>
+  <p class="brand-sub">Fine Jewellery</p>
+  <span class="mode-badge">⚙ Admin Panel</span>
+</header>
+
+<!-- STICKY TOOLBAR -->
+<div class="toolbar">
+  <button class="btn-toggle" id="toggleBtn" onclick="toggleForm()">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+    </svg>
+    Add Product
+  </button>
+  <button class="btn-pdf" onclick="downloadPDF()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    Download Catalogue PDF
+  </button>
+</div>
+
+<!-- ADD PRODUCT FORM (slides down) -->
+<div class="form-panel" id="formPanel">
+  <div class="form-card">
+    <h2 class="form-title">Add New Jewellery</h2>
+    <div class="form-divider"></div>
+
+    <!-- Image — Required -->
+    <div class="form-group">
+      <label class="form-label">Product Image <span style="color:#c0392b;font-size:12px;">*</span></label>
+      <label class="upload-label" id="uploadLabel" for="imageInput">
+        <span class="upload-icon">📷</span>
+        <span class="upload-text">Tap to upload product photo</span>
+        <span class="upload-hint">JPG or PNG · required</span>
+      </label>
+      <input type="file" id="imageInput" accept="image/*" hidden />
+      <img id="imgPreview" class="img-preview hidden" alt="Preview" />
+    </div>
+
+    <!-- Name — Required -->
+    <div class="form-group">
+      <label class="form-label" for="pName">
+        Product Name <span style="color:#c0392b;font-size:12px;">*</span>
+      </label>
+      <input type="text" id="pName" class="form-input"
+        placeholder="e.g. Gold Kundan Necklace" maxlength="70" />
+    </div>
+
+    <!-- Description — Optional -->
+    <div class="form-group">
+      <label class="form-label" for="pDesc">
+        Description <span class="opt-tag">optional</span>
+      </label>
+      <textarea id="pDesc" class="form-input form-textarea"
+        placeholder="e.g. Handcrafted 22K gold with Kundan stones"
+        maxlength="160" rows="2"></textarea>
+    </div>
+
+    <!-- Price — Required -->
+    <div class="form-group">
+      <label class="form-label" for="pPrice">
+        Price (₹) <span style="color:#c0392b;font-size:12px;">*</span>
+      </label>
+      <input type="number" id="pPrice" class="form-input"
+        placeholder="e.g. 12500" min="0" />
+    </div>
+
+    <!-- Quantity — Optional -->
+    <div class="form-group">
+      <label class="form-label" for="pQty">
+        Available Quantity <span class="opt-tag">optional</span>
+      </label>
+      <input type="number" id="pQty" class="form-input"
+        placeholder="e.g. 5  (leave empty to hide)" min="0" />
+    </div>
+
+    <button class="btn-add-product" onclick="addProduct()">
+      Add to Catalogue &nbsp;✦
+    </button>
+    <p id="formErr" class="form-error hidden"></p>
+  </div>
+</div>
+
+<!-- CATALOGUE PREVIEW -->
+<section class="catalogue-section" id="catalogueSection">
+  <div class="section-hdr">
+    <div class="sec-line"></div>
+    <h2 class="sec-title">Your Collection</h2>
+    <div class="sec-line r"></div>
+  </div>
+
+  <div class="cat-grid" id="catGrid"></div>
+
+  <div class="empty-state" id="emptyState">
+    <div class="empty-icon">💎</div>
+    <p class="empty-title">No products yet</p>
+    <p class="empty-sub">Tap "Add Product" above to start building your jewellery catalogue.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <p class="footer-brand">✦ &nbsp; SAMVI &nbsp; ✦</p>
+  <p class="footer-note">Crafted with love &nbsp;·&nbsp; Made to last forever</p>
+</footer>
+
+<!-- PDF LOADING OVERLAY -->
+<div class="pdf-overlay hidden" id="pdfOverlay">
+  <div class="pdf-box">
+    <div class="spin-ring"></div>
+    <p>Generating Catalogue PDF…</p>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+  // Boot as ADMIN — loads storage, shows delete buttons
+  window.addEventListener('DOMContentLoaded', () => initApp(true));
+</script>
+</body>
+</html>

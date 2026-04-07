@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAMVI — Fine Jewellery Collection</title>
+  <meta name="description" content="Explore SAMVI's exclusive fine jewellery collection. Order directly on WhatsApp." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="hdr-ornament"><i></i><em>✦</em><i></i></div>
+  <h1 class="brand-name">SAMVI</h1>
+  <p class="brand-sub">Fine Jewellery</p>
+</header>
+
+<!-- CATALOGUE -->
+<section class="catalogue-section" id="catalogueSection">
+  <div class="section-hdr">
+    <div class="sec-line"></div>
+    <h2 class="sec-title">Our Collection</h2>
+    <div class="sec-line r"></div>
+  </div>
+
+  <div class="cat-grid" id="catGrid"></div>
+
+  <div class="empty-state" id="emptyState">
+    <div class="empty-icon">💎</div>
+    <p class="empty-title">Collection coming soon</p>
+    <p class="empty-sub">Our curated jewellery collection will be available here shortly. Please visit again.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <p class="footer-brand">✦ &nbsp; SAMVI &nbsp; ✦</p>
+  <p class="footer-note">Crafted with love &nbsp;·&nbsp; Made to last forever</p>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  // Boot as CUSTOMER — no delete buttons, no form
+  window.addEventListener('DOMContentLoaded', () => initApp(false));
+</script>
+</body>
+</html>
